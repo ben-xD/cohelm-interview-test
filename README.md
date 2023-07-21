@@ -86,13 +86,13 @@ guidance and assess how well you are implementing the solution.
 ### Install dependencies
 
 ```
-npm install
+pnpm install
 ```
 
 ### Run automated tests
 
 ```
-npm test
+pnpm test
 ```
 
 ## Licence
