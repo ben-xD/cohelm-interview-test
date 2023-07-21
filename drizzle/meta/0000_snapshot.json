@@ -1,19 +1,12 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "2caa429f-fdf5-4dd3-ba0b-b31dde231c9a",
+  "id": "a640ce5f-99b8-4700-aa2e-eec0dc6cca54",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "cells": {
       "name": "cells",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
         "name": {
           "name": "name",
           "type": "text",
@@ -32,7 +25,7 @@
           "name": "max_confluence",
           "type": "real",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         }
       },

@@ -1,22 +1,36 @@
 import { Server } from "node:http";
 import { promisify } from "node:util";
-
 import { Express } from "express";
-
+import inspector from 'inspector';
 import request from "supertest";
+import Database from "better-sqlite3";
+import {drizzle} from "drizzle-orm/better-sqlite3";
 
-const getCellNames = (cells) => cells.map(({ name }) => name);
+const getCellNames = (cells: {name: string}[]) => cells.map(({ name }) => name);
 
-jest.setTimeout(100);
+if (!inspector.url()) { // only set test timeout when not using debugger.
+    jest.setTimeout(100);
+}
+
+jest.mock('./db/db.ts', () => {
+    const actual = jest.requireActual('./db/db');
+
+    const db = drizzle(new Database(":memory:"));
+
+    return {
+        ...actual,
+        db
+    };
+})
 
 describe("Express App", () => {
     let app: Express;
-    let server: Server;
+    let server: Server | undefined;
 
     beforeEach(async () => {
         jest.resetModules();
         ({ app } = await import("./app"));
-        server = await promisify(app.listen).bind(app)();
+        server = await promisify(app.listen).bind(app)() as Server;
     });
 
     afterEach(async () => {
