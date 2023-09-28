@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: Cohelm test
+
+paths:
+  /{patientId}/medical-records:
+    get:
+      summary: Get all medical records for patients.
+      parameters:
+        - name: patientId
+          in: path
+          description: "ID of the patient"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: All files returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    originalFilename:
+                      type: string
+
+        "400":
+          description: Bad request
+        "500":
+          description: Server error
+    post:
+      summary: Upload medical records
+      description: Allows for the upload of multiple medical record files for the same patient. PDF files only.
+      parameters:
+        - name: patientId
+          in: path
+          description: "ID of the patient"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: The array of files to upload.
+            required:
+              - files
+      responses:
+        "200":
+          description: Files uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  successfulFileUploads:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filename:
+                          type: string
+                        id:
+                          type: string
+                  failedFileUploads:
+                    type: array
+                    items:
+                      type: string
+        "400":
+          description: Bad request
+        "500":
+          description: Server error
+
+  /{patientId}/utilization-reviews:
+    post:
+      summary: Create a utilization review based on all specified medical records for a patient.
+      parameters:
+        - name: patientId
+          in: path
+          description: "ID of the patient"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                guidelinesText:
+                  type: string
+                medicalRecordIds:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  criteria:
+                    type: string
+                  score:
+                    type: number
+                  met:
+                    type: boolean
+                  evidence:
+                    type: string
+                  reasoning:
+                    type: string
+                  page:
+                    type: number
+        "400":
+          description: Bad request
+        "500":
+          description: Server error
+
+  /utilization-reviews:
+    get:
+      summary: Get all utilization reviews for patient
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    criteria:
+                      type: string
+                    score:
+                      type: number
+                    met:
+                      type: boolean
+                    evidence:
+                      type: string
+                    reasoning:
+                      type: string
+                    page:
+                      type: number
+        "400":
+          description: Bad request
+        "500":
+          description: Server error
