@@ -93,7 +93,7 @@ fastify.get<{ Params: { patientId: string } }>(
       .where(eq(medicalRecordsTable.patientId, patientId))
       .all();
     return selectMedicalRecordsSchema.array().parse(records);
-  }
+  },
 );
 
 // TODO Route to static files (web page)
@@ -137,7 +137,7 @@ fastify.post<{ Params: { patientId: string } }>(
     if (dbInserts.length > 0)
       db.insert(medicalRecordsTable).values(dbInserts).run();
     return reply.status(200).send({ failedFileUploads, successfulFileUploads });
-  }
+  },
 );
 
 fastify.post<{ Params: { patientId: string } }>(
@@ -172,7 +172,7 @@ fastify.post<{ Params: { patientId: string } }>(
       .run();
 
     return reply.status(200).send(review);
-  }
+  },
 );
 
 // We could also scope this for each patient easily.

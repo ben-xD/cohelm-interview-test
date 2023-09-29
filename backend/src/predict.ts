@@ -62,6 +62,6 @@ export default async function predict({
   if (!guidelinesText) throw new Error("Missing required parameters");
 
   return new Promise((resolve) =>
-    setTimeout(() => resolve(exampleResponse), 1000)
+    setTimeout(() => resolve(exampleResponse), 1000),
   );
 }

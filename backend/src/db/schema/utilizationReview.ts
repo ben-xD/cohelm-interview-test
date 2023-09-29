@@ -12,13 +12,13 @@ export const utilizationReviewTable = sqliteTable("utilization_review", {
 });
 
 export const insertUtilizationReviewSchema = createInsertSchema(
-  utilizationReviewTable
+  utilizationReviewTable,
 );
 export type InsertUtilizationReviewSchema = z.infer<
   typeof insertUtilizationReviewSchema
 >;
 export const selectUtilizationReviewSchema = createSelectSchema(
-  utilizationReviewTable
+  utilizationReviewTable,
 );
 export type SelectUtilizationReviewSchema = z.infer<
   typeof selectUtilizationReviewSchema
