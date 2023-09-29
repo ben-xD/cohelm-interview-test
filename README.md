@@ -26,6 +26,6 @@
 ## Goals
 - Deliver something a long the lines that Cohelm wanted (task sent via email).
 - Experiment:
-  - Try Radix UI and shadcn/ui.
+  - Try Radix UI and shadcn/ui, and build a template that I can use for any future projects.
   - Use Fastify + OpenAPI + Drizzle-orm in the same project (I will open source a template/starter-repo based on what I learn). I am very conscious this is a slower approach compared to tRPC (type safe, end to end APIs), however it is limited to Typescript clients. I wanted to define a widely-compatible API (without incurring the cost of protobuf/gRPC serialization and toolchain complexity).
 - Use playwright to test end to end (frontend and backend). If this was a real project, I'd backend specific integration tests that only test the APIs
