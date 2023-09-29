@@ -7,10 +7,12 @@ import { indexRoute } from "./IndexPage.tsx";
 import { rootRoute } from "./Root.tsx";
 import { createUtilizationReviewRoute } from "./patient/CreateUtilizationReview.tsx";
 import "./globals.css";
+import { utilizationReviewRoute } from "./patient/UtilizationReviews.tsx";
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
   createUtilizationReviewRoute,
+  utilizationReviewRoute,
 ]);
 
 const router = new Router({ routeTree });

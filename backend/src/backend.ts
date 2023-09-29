@@ -147,15 +147,18 @@ fastify.post<{ Params: { patientId: string } }>(
 
     const { guidelinesText, medicalRecordIds } = z
       .object({
-        medicalRecordIds: z.string().array(),
+        medicalRecordIds: z.string().array().optional(),
         guidelinesText: z.string(),
       })
       .parse(request.body);
 
     // A real predict function would want the medical records too
     // Load medical records that belong to the same user from disk, to give it to the predict function.
-    const medicalRecords = medicalRecordIds.map((id) => "file contents");
-    const review = await predict({ guidelinesText, medicalRecords });
+    const medicalRecords = medicalRecordIds?.map((id) => "file contents");
+    const review = await predict({
+      guidelinesText,
+      medicalRecords: medicalRecords ?? [],
+    });
 
     const reviewId = uuidv4();
     db.insert(utilizationReviewTable)
