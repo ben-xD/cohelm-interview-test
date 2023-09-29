@@ -6,9 +6,8 @@ import fs from "node:fs";
 import util from "node:util";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
-import "dotenv/config";
+import cors from "@fastify/cors";
 import { pipeline } from "node:stream";
-const pump = util.promisify(pipeline);
 import { v4 as uuidv4 } from "uuid";
 import {
   InsertMedicalRecordsSchema,
@@ -19,6 +18,9 @@ import {
 import predict from "./predict";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
+
+const pump = util.promisify(pipeline);
+import "dotenv/config";
 
 const getUploadFolderPath = () => {
   // In a real project, I would store them in Cloudflare R2 (AWS S3 alternative).
@@ -49,6 +51,11 @@ fastify.register(fastifySwagger, {
     path: "./openapi.yaml",
     baseDir: "./",
   },
+});
+console.info(`Accepting requests from ${process.env.ORIGIN_URL} origin`);
+fastify.register(cors, {
+  methods: ["GET", "PUT", "POST", "OPTIONS", "PATCH", "DELETE"],
+  origin: process.env.ORIGIN_URL,
 });
 
 // I'd put swagger UI behind auth or only in development mode in a real project
