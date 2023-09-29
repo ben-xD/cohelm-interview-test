@@ -1,5 +1,10 @@
 # Cohelm test
 
+## Links
+- Frontend: https://cohelm.pages.dev
+- API: https://cohelm-test.fly.dev
+  - API docs: https://cohelm-test.fly.dev/documentation
+
 ## Getting started
 
 - Install node version specified in `.node_version` (I use `fnm`, so I run `fnm install 20.7.0` and `fnm use 20.7.0`)
