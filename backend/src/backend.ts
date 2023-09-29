@@ -52,10 +52,11 @@ fastify.register(fastifySwagger, {
     baseDir: "./",
   },
 });
-console.info(`Accepting requests from ${process.env.ORIGIN_URL} origin`);
 fastify.register(cors, {
   methods: ["GET", "PUT", "POST", "OPTIONS", "PATCH", "DELETE"],
-  origin: process.env.ORIGIN_URL,
+  // Simpler for this demo.
+  origin: true,
+  // origin: process.env.ORIGIN_URL,
 });
 
 // I'd put swagger UI behind auth or only in development mode in a real project
@@ -93,7 +94,7 @@ fastify.get<{ Params: { patientId: string } }>(
       .where(eq(medicalRecordsTable.patientId, patientId))
       .all();
     return selectMedicalRecordsSchema.array().parse(records);
-  },
+  }
 );
 
 // TODO Route to static files (web page)
@@ -137,7 +138,7 @@ fastify.post<{ Params: { patientId: string } }>(
     if (dbInserts.length > 0)
       db.insert(medicalRecordsTable).values(dbInserts).run();
     return reply.status(200).send({ failedFileUploads, successfulFileUploads });
-  },
+  }
 );
 
 fastify.post<{ Params: { patientId: string } }>(
@@ -172,7 +173,7 @@ fastify.post<{ Params: { patientId: string } }>(
       .run();
 
     return reply.status(200).send(review);
-  },
+  }
 );
 
 // We could also scope this for each patient easily.
