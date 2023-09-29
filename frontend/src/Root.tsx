@@ -1,5 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Link, Outlet, RootRoute } from "@tanstack/react-router";
+import { Link as RouterLink, Outlet, RootRoute } from "@tanstack/react-router";
+import { Badge } from "@/components/ui/badge";
+import { Link as RadixLink } from "@radix-ui/themes";
 
 const queryClient = new QueryClient();
 
@@ -17,11 +19,11 @@ export const Root = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <div className=" mt-8 mx-4 lg:mx-auto lg:w-1/2">
-        <Link to="/">
+        <RouterLink to="/">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             10s Utilization Review
           </h1>
-        </Link>
+        </RouterLink>
         <p className="leading-7">
           The utilization review app that takes 10 seconds using AI.
         </p>
@@ -29,6 +31,11 @@ export const Root = () => {
           It doesn't really use AI. It just returns useless utilization review
           data.
         </p>
+        <RadixLink href="https://cohelm-test.fly.dev/documentation">
+          <Badge className="my-2" variant="outline">
+            API documentation
+          </Badge>
+        </RadixLink>
         <Outlet />
         {/* <Suspense>
           <TanStackRouterDevtools />

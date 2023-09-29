@@ -75,7 +75,7 @@ const ExistingMedicalRecords = (patientId: { patientId: string }) => {
 export const CreateUtilizationReview = () => {
   const { patientId } = useParams({ from: indexRoute.id });
 
-  const onFilesAdded = (pdfFiles: File[]) => {
+  const onFilesSelected = (pdfFiles: File[]) => {
     console.info({ pdfFiles });
   };
 
@@ -90,12 +90,19 @@ export const CreateUtilizationReview = () => {
 
   return (
     <div className="m-4 flex flex-col gap-8 items-start">
+      <div>
+        <h1 className="text-lg">
+          <span className="font-semibold">Patient name:</span> {patientId}
+        </h1>
+        <h1 className="text-lg">
+          <span className="font-semibold">Date of birth:</span> 30-09-1924
+        </h1>
+      </div>
       <div className="flex flex-col gap-2 w-full">
         <h2 className="border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 w-full">
           Upload medical records
         </h2>
-        Patient: {patientId}
-        <FileDrop onFilesAdded={onFilesAdded} />
+        <FileDrop onFilesSelected={onFilesSelected} />
         <div>
           <Button onClick={onUploadAll}>Upload all</Button>
         </div>
