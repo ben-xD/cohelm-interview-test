@@ -12,7 +12,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExistingMedicalRecordsView } from "./ExistingMedicalRecordsView";
 import { Textarea } from "@/components/ui/textarea";
-import { Evidence } from "./UtilizationReviews";
+import { Evidence, utilizationReviewRoute } from "./UtilizationReviews";
 
 export const CreateUtilizationReview = () => {
   const { patientId } = useParams({ from: indexRoute.id });
@@ -42,31 +42,29 @@ export const CreateUtilizationReview = () => {
     },
   });
 
-  const createUtilizationReviewMutation = useMutation<UtilizationReview, Error>(
-    {
-      mutationFn: async () => {
-        const response = await fetch(
-          addPathToUrl(new URL(backendUrl), `${patientId}/utilization-reviews`),
-          {
-            method: "post",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              guidelinesText: guidelines,
-              // TO simplify, we don't send the medical record ids for now.
-              // medicalRecordIds: selectedFiles?.map()
-            }),
-          }
-        );
-        const body = (await response.json()) as { evidence: Evidence[] };
-        console.error(body);
-        setEvidences(body.evidence);
-        return body;
-      },
-    }
-  );
+  const createUtilizationReviewMutation = useMutation<unknown, Error>({
+    mutationFn: async () => {
+      const response = await fetch(
+        addPathToUrl(new URL(backendUrl), `${patientId}/utilization-reviews`),
+        {
+          method: "post",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            guidelinesText: guidelines,
+            // TO simplify, we don't send the medical record ids for now.
+            // medicalRecordIds: selectedFiles?.map()
+          }),
+        }
+      );
+      const body = (await response.json()) as { evidence: Evidence[] };
+      console.error(body);
+      setEvidences(body.evidence);
+      return body;
+    },
+  });
 
   const onFilesSelected = (pdfFiles: File[]) => {
     setAllFilesUploaded(false);
@@ -85,10 +83,7 @@ export const CreateUtilizationReview = () => {
         <h1 className="text-lg">
           <span className="font-semibold">Date of birth:</span> 30-09-1924
         </h1>
-        <Link
-          to="../../$patientId/utilization-reviews"
-          params={{ patientId: patientId }}
-        >
+        <Link to={utilizationReviewRoute.to} params={{ patientId: patientId }}>
           <Badge className="my-2" variant="outline">
             older utilization reviews
           </Badge>
