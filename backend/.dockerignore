@@ -4,3 +4,4 @@ Dockerfile
 node_modules
 .git
 db.sqlite3
+dist
