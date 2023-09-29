@@ -50,6 +50,9 @@ fastify.register(fastifySwagger, {
     baseDir: "./",
   },
 });
+
+// I'd put swagger UI behind auth or only in development mode in a real project
+// but it's nice to see it when deployed.
 fastify.register(fastifySwaggerUi, {
   routePrefix: "/documentation",
   uiConfig: {
@@ -64,68 +67,73 @@ fastify.register(fastifySwaggerUi, {
       next();
     },
   },
-  staticCSP: true,
+  staticCSP: false,
   transformStaticCSP: (header) => header,
   transformSpecification: (swaggerObject, request, reply) => {
     return swaggerObject;
   },
   transformSpecificationClone: true,
 });
-// fastify.register(fastifyStatic, {
-//   root: "frontend",
-//   prefix: "/",
-// });
 
-fastify.get("/:patientId/medical-records", async (request, reply) => {
-  const { patientId } = request.params;
+fastify.get<{ Params: { patientId: string } }>(
+  "/:patientId/medical-records",
+  async (request, reply) => {
+    const { patientId } = request.params;
 
-  const records = db
-    .select()
-    .from(medicalRecordsTable)
-    .where(eq(medicalRecordsTable.patientId, patientId))
-    .all();
-  return selectMedicalRecordsSchema.array().parse(records);
-});
+    const records = db
+      .select()
+      .from(medicalRecordsTable)
+      .where(eq(medicalRecordsTable.patientId, patientId))
+      .all();
+    return selectMedicalRecordsSchema.array().parse(records);
+  }
+);
 
 // TODO Route to static files (web page)
-fastify.post("/:patientId/medical-records", async (request, reply) => {
-  const { patientId } = request.params;
+fastify.post<{ Params: { patientId: string } }>(
+  "/:patientId/medical-records",
+  async (request, reply) => {
+    const { patientId } = request.params;
 
-  if (!fs.existsSync(uploadFolderPath)) {
-    fs.mkdirSync(uploadFolderPath);
-  }
-
-  const dbInserts: InsertMedicalRecordsSchema[] = [];
-  const failedFileUploads: string[] = [];
-  const successfulFileUploads: { filename: string; id: string }[] = [];
-  for await (const part of request.files()) {
-    if (part.type === "file" && part.filename.toLowerCase().endsWith(".pdf")) {
-      const fileId = uuidv4();
-
-      const uploadFilePath = uploadFolderPath + fileId + ".pdf";
-      console.info(`Saving to ${uploadFilePath}`);
-      await pump(part.file, fs.createWriteStream(uploadFilePath));
-      if (part.file.truncated) {
-        failedFileUploads.push(part.filename);
-      } else {
-        successfulFileUploads.push({ filename: part.filename, id: fileId });
-        dbInserts.push({
-          id: fileId,
-          patientId,
-          uploadedAt: new Date(),
-          originalFilename: part.filename,
-        });
-      }
-    } else {
-      failedFileUploads.push(part.filename);
+    if (!fs.existsSync(uploadFolderPath)) {
+      fs.mkdirSync(uploadFolderPath);
     }
-  }
-  if (dbInserts.length > 0)
-    db.insert(medicalRecordsTable).values(dbInserts).run();
-  return reply.status(200).send({ failedFileUploads, successfulFileUploads });
-});
 
-fastify.post(
+    const dbInserts: InsertMedicalRecordsSchema[] = [];
+    const failedFileUploads: string[] = [];
+    const successfulFileUploads: { filename: string; id: string }[] = [];
+    for await (const part of request.files()) {
+      if (
+        part.type === "file" &&
+        part.filename.toLowerCase().endsWith(".pdf")
+      ) {
+        const fileId = uuidv4();
+
+        const uploadFilePath = uploadFolderPath + fileId + ".pdf";
+        console.info(`Saving to ${uploadFilePath}`);
+        await pump(part.file, fs.createWriteStream(uploadFilePath));
+        if (part.file.truncated) {
+          failedFileUploads.push(part.filename);
+        } else {
+          successfulFileUploads.push({ filename: part.filename, id: fileId });
+          dbInserts.push({
+            id: fileId,
+            patientId,
+            uploadedAt: new Date(),
+            originalFilename: part.filename,
+          });
+        }
+      } else {
+        failedFileUploads.push(part.filename);
+      }
+    }
+    if (dbInserts.length > 0)
+      db.insert(medicalRecordsTable).values(dbInserts).run();
+    return reply.status(200).send({ failedFileUploads, successfulFileUploads });
+  }
+);
+
+fastify.post<{ Params: { patientId: string } }>(
   "/:patientId/utilization-reviews",
   async function handler(request, reply) {
     const { patientId } = request.params;
@@ -182,10 +190,11 @@ fastify.get("/utilization-reviews", async (request, reply) => {
   return reviews;
 });
 
+// So fly can control the port.
 const port = Number(process.env.PORT) || 8080;
 
 fastify
-  .listen({ port })
+  .listen({ port, host: "0.0.0.0" })
   .then((address) => console.info(`Listening on ${address}`))
   .catch((err) => {
     fastify.log.error(err);
