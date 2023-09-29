@@ -10,6 +10,9 @@ importers:
 
   backend:
     dependencies:
+      '@fastify/cors':
+        specifier: ^8.4.0
+        version: 8.4.0
       '@fastify/multipart':
         specifier: ^7.7.3
         version: 7.7.3

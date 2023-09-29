@@ -15,6 +15,7 @@
         "db:ui": "drizzle-kit studio"
     },
     "dependencies": {
+        "@fastify/cors": "^8.4.0",
         "@fastify/multipart": "^7.7.3",
         "@fastify/static": "^6.11.2",
         "@fastify/swagger": "^8.10.1",
