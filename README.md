@@ -30,3 +30,9 @@
   - Get more familiar with Radix UI, shadcn/ui, tanstack router and tanstack query, and build toward a template that I can use for any future projects.
   - Use Fastify + OpenAPI + Drizzle-orm in the same project (I will open source a template/starter-repo based on what I learn). I am very conscious this is a slower approach compared to tRPC (type safe, end to end APIs), however it is limited to Typescript clients. I wanted to define a widely-compatible API (without incurring the cost of protobuf/gRPC serialization and toolchain complexity).
 - #not-done Use playwright to test end to end (frontend and backend). If this was a real project, I'd backend specific integration tests that only test the APIs.
+
+## Annoying points with Fly.io
+- When using `fly deploy` the dockerfile will automatically copy the `dist` folder, which means it uses your local, stale build into deployment. 
+- The generated dockerfile does not build the application. It's quite badly written too.
+- DNS propagation for recreating projects can be delayed, which is also confusing. DNS records would be missing.
+- They assume you have set up your project to use Husky. If your project doesn't have Husky configured, you cannot even set up Fly for your project.
