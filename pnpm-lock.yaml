@@ -125,6 +125,9 @@ importers:
       '@tanstack/react-router':
         specifier: 0.0.1-beta.194
         version: 0.0.1-beta.194(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-router-devtools':
+        specifier: 0.0.1-alpha.1
+        version: 0.0.1-alpha.1(@tanstack/react-router@0.0.1-beta.194)(react-dom@18.2.0)(react@18.2.0)
       boring-avatars:
         specifier: ^1.10.1
         version: 1.10.1
@@ -2672,6 +2675,21 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
+  /@tanstack/react-router-devtools@0.0.1-alpha.1(@tanstack/react-router@0.0.1-beta.194)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-GwYSq37F5kro5QzcH+NMGbCEhmSqhLowSLUC65hzxSA44w9qHhA/SBId/G2iaxF6I6U9ZtIO+3W4sScqH8DLTw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@tanstack/react-router': 0.0.1-alpha.1
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@babel/runtime': 7.23.1
+      '@tanstack/react-router': 0.0.1-beta.194(react-dom@18.2.0)(react@18.2.0)
+      date-fns: 2.30.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@tanstack/react-router@0.0.1-beta.194(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-RPjSz3EIcLVmBcHogRsla4eqlPxA9sS5j/smX32Dw5twuy+wmZ+URn9qPC0LBlDPVlFiKEJqnKQqE/jKWTH5bw==}
     engines: {node: '>=12'}
@@ -3834,7 +3852,6 @@ packages:
     engines: {node: '>=0.11'}
     dependencies:
       '@babel/runtime': 7.23.1
-    dev: true
 
   /dateformat@4.6.3:
     resolution: {integrity: sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==}
