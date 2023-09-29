@@ -3,7 +3,7 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const utilizationReviewTable = sqliteTable("utilization_review", {
-  id: text("id").unique().notNull(),
+  id: text("id").primaryKey().unique().notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   // Would usually be a foreign key that references usersTable.id
   patientId: text("patient_id").notNull(),
@@ -25,7 +25,7 @@ export type SelectUtilizationReviewSchema = z.infer<
 >;
 
 export const medicalRecordsTable = sqliteTable("medical_records", {
-  id: text("id").unique().notNull(),
+  id: text("id").primaryKey().unique().notNull().primaryKey(),
   patientId: text("patient_id").notNull(),
   originalFilename: text("original_filename"), // for better comms with customers
   uploadedAt: integer("created_at", { mode: "timestamp" }).notNull(),
