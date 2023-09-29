@@ -23,6 +23,10 @@
   - Run application: `pnpm dev`
   - Run tests: `pnpm tests`
 
+## To run locally, you need to edit both  `.env` files
+- I haven't had the time to get the CORS URLs to be dynamic, so we need to update .env files...
+- When running locally, use `http://localhost:$port` URLs or `*` in backend and frontend `.env` files.
+
 ## Goals
 - Deliver something a long the lines that Cohelm wanted (task sent via email).
 - Experiment:
