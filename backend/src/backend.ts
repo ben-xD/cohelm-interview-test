@@ -54,9 +54,8 @@ fastify.register(fastifySwagger, {
 });
 fastify.register(cors, {
   methods: ["GET", "PUT", "POST", "OPTIONS", "PATCH", "DELETE"],
-  // Simpler for this demo.
+  // Simpler for this demo to allow all requests.
   origin: true,
-  // origin: process.env.ORIGIN_URL,
 });
 
 // I'd put swagger UI behind auth or only in development mode in a real project
