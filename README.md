@@ -36,3 +36,4 @@
 - The generated dockerfile does not build the application. It's quite badly written too.
 - DNS propagation for recreating projects can be delayed, which is also confusing. DNS records would be missing.
 - They assume you have set up your project to use Husky. If your project doesn't have Husky configured, you cannot even set up Fly for your project.
+- With `auto_stop_machines=true` in `fly.toml` (the default generated config), the machines are auto stopped when not being used. When users visit your app, the app will start. However, when it restarts, it won't use the same image that was turned off. Instead, it will use the **latest** image, even if it's broken - which means your app will be unusable.

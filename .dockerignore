@@ -1,0 +1,11 @@
+*/fly.toml
+*/Dockerfile
+*/docker-compose.yml
+*.md
+.dockerignore
+*/node_modules
+.git
+**/*.sqlite3
+*/dist
+*/.gitignore
+backend/tmp-uploads
