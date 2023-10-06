@@ -1,6 +1,6 @@
-# Cohelm interview test
+# Cohelm application test
 
-This is my attempt/solution to a test as part of an application process. I was messaged on LinkedIn by a Cohelm founder. 
+This is my attempt/solution to a test as part of an application process. I was messaged on LinkedIn by a Cohelm founder. I did this prior to joining my current job.
 
 ## Links
 - Frontend: https://cohelm.pages.dev
