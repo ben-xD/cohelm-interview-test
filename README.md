@@ -2,15 +2,15 @@
 
 This is my attempt/solution to a test as part of an application process. I was messaged on LinkedIn by a Cohelm founder. I did this prior to joining my current job.
 
+I want to open source it because I want to share some interesting code using the following technologies:
+- Frontend: React, Radix UI, Shadcn/ui
+- Backend: Fastify, OpenAPI
+- Infrastucture: Cloudflare Pages and Fly.io
+
 ## Links
 - Frontend: https://cohelm.pages.dev
 - API: https://cohelm-test.fly.dev
   - API docs: https://cohelm-test.fly.dev/documentation
-
-## Technologies
-- Frontend: React, Radix UI, Shadcn/ui
-- Backend: Fastify, OpenAPI
-- Infrastucture: Cloudflare Pages and Fly.io
 
 ## Update: Feedback from Cohelm
 
