@@ -1,6 +1,6 @@
 # Cohelm interview test
 
-This is my attempt/solution to a test as part of an application process before I started my current job. I was messaged on LinkedIn by a Cohelm founder, and they gave me a take home test.
+This is my attempt/solution to a test as part of an application process before I started my current job. I was messaged on LinkedIn by a Cohelm founder, and they gave me a take home test related to [utilisation review](https://www.merriam-webster.com/dictionary/utilization%20review) - related to Healthcare insurance.
 
 ## Why open source?
 
