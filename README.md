@@ -1,8 +1,10 @@
-# Cohelm application test
+# Cohelm interview test
 
-This is my attempt/solution to a test as part of an application process. I was messaged on LinkedIn by a Cohelm founder. I did this prior to joining my current job.
+This is my attempt/solution to a test as part of an application process before I started my current job. I was messaged on LinkedIn by a Cohelm founder, and they gave me a take home test.
 
-I want to open source it because I want to share some interesting code using the following technologies:
+## Why open source?
+
+I want to open source it because I want to experiment and share some interesting code using the following technologies:
 - Frontend: React, Radix UI, Shadcn/ui
 - Backend: Fastify, OpenAPI
 - Infrastucture: Cloudflare Pages and Fly.io
@@ -10,9 +12,11 @@ I want to open source it because I want to share some interesting code using the
 ## Links
 - Frontend: https://cohelm.pages.dev
 - API: https://cohelm-test.fly.dev
-  - API docs: https://cohelm-test.fly.dev/documentation
+  - API docs (Swagger): https://cohelm-test.fly.dev/documentation
 
-## Update: Feedback from Cohelm
+## Interview results
+
+### Feedback from Cohelm
 
 We wanted to provide you with some feedback on areas where we feel you could improve for future reference. We were impressed by your comprehensive solution that covered all parts of the assessment requirements.
 
@@ -25,9 +29,13 @@ However, there were a few areas where we felt your code could be improved:
 
 We understand that this may be disappointing news, but we encourage you to continue to develop your skills and apply for future opportunities with us. We value your interest in our company and appreciate the time you took to complete this assessment.
 
-## My thoughts
+### My thoughts
 
-Thank you! Feedback is a gift. It's dissapointing to see all the feedback here related to minor problems that can be easily fixed (except for using NextJS-specific API, which I think is a bad idea). These are areas I consciously neglected given the time constraints and my interests.
+Thank you! Feedback is a gift, especially when it's easier not to say anything. 
+
+I'm glad I demonstrated code that is easy to read and maintain, that's one of my principles.
+
+Fundamentally the issues arose because my priorities were not aligned with the marking criteria. I wanted to do what i liked, rather than answer the test. However, I hope to **already** demonstrate empathy for the user in my portfolio, see https://orth.uk/projects and open source projects. I also consciously avoided NextJS-specific API, to avoid writing code that introduces vendor lock in.
 
 ## Getting started
 
