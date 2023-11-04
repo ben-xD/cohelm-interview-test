@@ -35,7 +35,7 @@ Thank you! Feedback is a gift, especially when it's easier not to say anything.
 
 I'm glad I demonstrated code that is easy to read and maintain, that's one of my principles.
 
-Fundamentally the issues arose because my priorities were not aligned with the marking criteria. I wanted to do what i liked, rather than answer the test. However, I hope to **already** demonstrate empathy for the user in my portfolio, see https://orth.uk/projects and open source projects. I also consciously avoided NextJS-specific API, to avoid writing code that introduces vendor lock in.
+However, this project was admittedly quite time consuming (reaching past 10 hours), and I decided I didn't want to continue spending more effort on it. That may have been caused by me deciding to experiment with new technologies. I hope to demonstrate empathy for the user in my portfolio, see https://orth.uk/projects and open source projects. I also consciously avoided NextJS-specific API, to avoid writing code that introduces vendor lock in.
 
 ## Getting started
 
